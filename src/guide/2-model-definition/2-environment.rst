@@ -67,6 +67,27 @@ Any arithmetic or enum type can be used as an environment property
     env.newPropertyChar("c_prop", 'g', True)  # Create constant char property 'c_prop', with value 'g'
 
 
+Macro Environmental Properties
+---------------------------------
+Macroscopic environment properties are less efficient than the regular environment properties described above, as they reside in slower memory. However, they are useful when a model requires a large amount of environment data to be stored, or to perform simple tasks between agents, such as counting and exchanging swapping data, without needing to send and recieve messages across multiple simulation layers.
+
+Macro environment properties can be defined similarly to normal environment properties. However they support arrays with upto 4 dimensions, and are always default initialised to 0.
+
+.. tabs::
+
+  .. code-tab:: cuda CUDA C++
+
+    // Define environmental macro properties
+    env.newMacroProperty<float>("mf_prop");                  // Create float macro property 'mf_prop' from a singular float
+    env.newMacroPropertyadd<int, 3, 3, 3, 3>("mi333_prop");  // Create int array macro property 'mi_prop', with dimensions of [3, 3, 3, 3]
+
+  .. code-tab:: python
+
+    # Define environmental properties and their initial values
+    env.newMacroPropertyFloat("mf_prop");               # Create float macro property 'mf_prop' from a singular float
+    env.newMacroPropertyaddInt("mi_prop", 3, 3, 3, 3);  # Create int array macro property 'mi_prop', with dimensions of [3, 3, 3, 3]
+
+
 Full Example Code From This Page
 --------------------------------
 
@@ -83,6 +104,10 @@ Full Example Code From This Page
     env.newProperty<float>("f_prop", 12.0f);        // Create float property 'f_prop', with value of 12
     env.newProperty<int, 3>("ia_prop", {1, 2, 3});  // Create int array property 'ia_prop', with value of [1, 2, 3]
     env.newProperty<char>("c_prop", 'g', true);     // Create constant char property 'c_prop', with value 'g'
+    
+    // Define environmental macro properties
+    env.newMacroProperty<float>("mf_prop");                  // Create float macro property 'mf_prop' from a singular float
+    env.newMacroPropertyadd<int, 3, 3, 3, 3>("mi333_prop");  // Create int array macro property 'mi_prop', with dimensions of [3, 3, 3, 3]
 
   .. code-tab:: python
   
@@ -95,6 +120,10 @@ Full Example Code From This Page
     env.newPropertyFloat("f_prop", 12.0)     # Create float property 'f_prop', with value of 12
     env.newPropertyArrayInt("ia_prop", 3, [1, 2, 3])  # Create int array property 'ia_prop', with value of [1, 2, 3]
     env.newPropertyChar("c_prop", 'g', True)  # Create constant char property 'c_prop', with value 'g'
+    
+    # Define environmental properties and their initial values
+    env.newMacroPropertyFloat("mf_prop");               # Create float macro property 'mf_prop' from a singular float
+    env.newMacroPropertyaddInt("mi_prop", 3, 3, 3, 3);  # Create int array macro property 'mi_prop', with dimensions of [3, 3, 3, 3]
 
 More Info 
 ---------
